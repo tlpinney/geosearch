@@ -1,6 +1,9 @@
 package org.demo.geosearch;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 
 import org.geotools.data.FileDataStore;
 import org.geotools.data.FileDataStoreFinder;
@@ -68,7 +71,10 @@ public class App
         SimpleFeatureCollection sfc = fs.getFeatures();
         
         SimpleFeatureIterator i = sfc.features();
-
+        
+        BufferedWriter out = new BufferedWriter(new FileWriter("/home/ubuntu/buildings.tsv"));
+        
+        
         while( i.hasNext()  ){
             Feature feature = i.next();
             //print(feature.getName());
@@ -120,12 +126,17 @@ public class App
             
             String quadtile = "0000"; 
             
-           print(quadtile + "\t" + json);
+            //print(quadtile + "\tbuilding\t" + json);
            
+            out.write(quadtile + "\tbuilding\t" + json.get("osm_id") + "\t" + json + "\n");
+            
            //System.exit(0);
             
             
-        }        
+        }     
+        
+        out.close();
+        
         
         
     }
