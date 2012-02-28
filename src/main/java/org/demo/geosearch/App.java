@@ -111,7 +111,7 @@ public class App
             	
             	if (name == "the_geom") {
             		Geometry the_geom = reader.read(value);
-            		value = WKBWriter.toHex(bwriter.write(the_geom));
+            		value = WKBWriter.bytesToHex(bwriter.write(the_geom));
             	}
             	//print(name + ": " + value);
             	json.put(name, value);
